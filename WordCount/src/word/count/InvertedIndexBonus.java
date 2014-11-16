@@ -63,12 +63,13 @@ public class InvertedIndexBonus {
 			String line = value.toString();
 			// Replace punctuation with space
 			line = line.replaceAll("[^A-Za-z0-9]", " ");
-			for (String aWord : line.split("\\s+")) {
-				aWord = aWord.toLowerCase();
-				if (stopList.contains(aWord)) { // if the word belongs to stop list, just skip it
+			line = line.toLowerCase();
+			StringTokenizer tokenizer = new StringTokenizer(line);
+			while (tokenizer.hasMoreElements()) {
+				word.set(tokenizer.nextToken());
+				if (stopList.contains(word.toString())) {
 					continue;
 				}
-				word.set(aWord);
 				context.write(word, fileName);
 			}
 		}

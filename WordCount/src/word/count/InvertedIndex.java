@@ -36,9 +36,10 @@ public class InvertedIndex {
 			String line = value.toString();
 			// Replace punctuation with space
 			line = line.replaceAll("[^A-Za-z0-9]", " ");
-			for (String aWord : line.split("\\s+")) {
-				aWord = aWord.toLowerCase();
-				word.set(aWord);
+			line = line.toLowerCase();
+			StringTokenizer tokenizer = new StringTokenizer(line);
+			while (tokenizer.hasMoreElements()) {
+				word.set(tokenizer.nextToken());
 				context.write(word, fileName);
 			}
 		}
